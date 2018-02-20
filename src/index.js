@@ -6,17 +6,35 @@ module.exports = function getLoveTrianglesCount(preferences = []) {
   // your implementation
   preferences.unshift('move');
   let count = 0;
+  let indexArr = [];
   for(let firstIndex = 1; firstIndex < preferences.length;) {
-    let secondIndex = preferences[firstIndex];
-    let thirdIndex = preferences[secondIndex];
-    if (preferences[thirdIndex] === firstIndex && secondIndex !== thirdIndex) {
-      count += 1;
-      firstIndex += 3;
+    if(indexArr.includes(firstIndex)) {
+      firstIndex+=1;
     } else {
-      firstIndex += 3;
+      let secondIndex = preferences[firstIndex];
+      let thirdIndex = preferences[secondIndex];
+      let result = preferences[thirdIndex];
+      if (result === firstIndex) {
+        indexArr.push(firstIndex);
+        indexArr.push(secondIndex);
+        indexArr.push(thirdIndex);
+        count+=1;
+        firstIndex+=1;
+      } else {
+        firstIndex+=1;
+      }
     }
   }
   return count;
 };
 
-let arr = [2, 3, 1, 9, 8, 6, 3, 8, 1, 5];
+// let arr = ['h', 2, 3, 1, 5, 6, 4, 8, 9, 7, 11, 12, 10, 13, 9, 13, 2, 15, 13, 12, 11];
+// let secondIndex = preferences[firstIndex];
+//     let thirdIndex = preferences[secondIndex];
+//     let result = preferences[thirdIndex];
+//     if (result === firstIndex) {
+//       firstIndex += 3;
+//       count+=1;
+//     } else {
+//       firstIndex += 3;
+//     }
